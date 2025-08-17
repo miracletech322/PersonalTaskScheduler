@@ -49,7 +49,7 @@ class MainWindow(QMainWindow):
             file.close()
 
     def initMongoDB(self):
-        self.client = MongoClient("mongodb://atlas-sql-6830403052a89012f4a8d1c8-5oywao.a.query.mongodb.net/sample_mflix?ssl=true&authSource=admin")
+        self.client = MongoClient("mongodb+srv://miracletech322:HgqjOfh0QjIAWJDN@cluster0.b1te6ax.mongodb.net/")
         self.db = self.client["sample_mflix"]
         self.tableUsers = self.db["users"]
         return
