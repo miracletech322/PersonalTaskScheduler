@@ -1,5 +1,5 @@
 from PySide6.QtCore import Qt, QFile, QTextStream, QTimer
-from PySide6.QtWidgets import QMainWindow, QSystemTrayIcon, QMdiSubWindow
+from PySide6.QtWidgets import QMainWindow, QSystemTrayIcon, QMdiSubWindow, QMessageBox
 from PySide6.QtGui import QIcon
 from pymongo import MongoClient
 
@@ -27,6 +27,7 @@ class MainWindow(QMainWindow):
         self.initLCD()
         self.initSystemTray()
         self.initMongoDB()
+        self.handleBtnUserList()
 
     def initSystemTray(self):
         self.tray_icon = QSystemTrayIcon(self)
@@ -48,8 +49,8 @@ class MainWindow(QMainWindow):
             file.close()
 
     def initMongoDB(self):
-        self.client = MongoClient("mongodb://localhost:27017/")
-        self.db = self.client["dbPersonalTaskScheduler"]
+        self.client = MongoClient("mongodb://atlas-sql-6830403052a89012f4a8d1c8-5oywao.a.query.mongodb.net/sample_mflix?ssl=true&authSource=admin")
+        self.db = self.client["sample_mflix"]
         self.tableUsers = self.db["users"]
         return
 
@@ -99,7 +100,14 @@ class MainWindow(QMainWindow):
         self.ui.btnAccountabilityReports.setStyleSheet("background-color: #9933cc;")
     
     def handleBtnUserName(self):
-        return
+        if self.ui.btnUserName.text() == "Sign In":
+            self.handleBtnUserList()
+        else:
+            reply = QMessageBox.question(self, "Sign Out", f'Do you want to sign out from "{self.ui.btnUserName.text()}" account?', QMessageBox.Yes | QMessageBox.No)
+            if reply == QMessageBox.No:
+                return
+            else:
+                self.ui.btnUserName.setText("Sign In")
 
     def slt_updateDateTime(self):
         current_time = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
@@ -123,3 +131,5 @@ class MainWindow(QMainWindow):
     def funcUserSign(self, username, userId):
         self.ui.btnUserName.setProperty("userId", userId)
         self.ui.btnUserName.setText(username)
+
+        QMessageBox.information(self, "Login", f"Welcome {username}! You have successfully signed in.")
