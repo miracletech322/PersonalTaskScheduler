@@ -1,4 +1,4 @@
-#centeralwidget {
+#centeralwidget, #scrollArea {
 	background-color:  #3a3a3a;
 }
 
@@ -14,4 +14,26 @@ QPushButton {
 
 QPushButton:hover {
     background-color: #aa17e8;
+}
+
+QScrollBar:vertical {
+    background: transparent;
+    width: 6px;
+    margin: 2px 0 2px 0;
+    border: none;
+}
+
+QScrollBar::handle:vertical {
+    background: #555;
+    border-radius: 3px;
+    min-height: 20px;
+}
+
+QScrollBar::handle:vertical:hover {
+    background: #777;
+}
+
+QScrollBar::add-line:vertical, QScrollBar::sub-line:vertical, QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
+    background: none;
+    height: 0px;
 }
