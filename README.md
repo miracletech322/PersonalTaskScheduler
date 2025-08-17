@@ -8,9 +8,14 @@ pyside6-rcc resources/resources.qrc -o resources_rc.py
 pyside6-uic mainwindow.ui -o ui_mainwindow.py
 pyside6-uic usermanagement.ui -o ui_usermanagement.py
 pyside6-uic userlist.ui -o ui_userlist.py
+pyside6-uic taskmanagement.ui -o ui_taskmanagement.py
+pyside6-uic accountabilityreports.ui -o ui_accountabilityreports.py
 py main.py
 
 pyside6-designer mainwindow.ui
 pyside6-designer usermanagement.ui
+pyside6-designer userlist.ui
+pyside6-designer taskmanagement.ui
+pyside6-designer accountabilityreports.ui
 
 pyinstaller --onefile --windowed main.py

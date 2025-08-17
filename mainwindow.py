@@ -7,9 +7,12 @@ from bson import ObjectId
 from qasync import asyncSlot
 from datetime import datetime
 
-from ui_mainwindow import Ui_MainWindow
 from userlist import UserList
 from usermanagement import UserManagement
+from taskmanagement import TaskManagement
+from accountabilityreports import AccountabilityReports
+
+from ui_mainwindow import Ui_MainWindow
 
 class MainWindow(QMainWindow):
     def __init__(self):
@@ -92,12 +95,28 @@ class MainWindow(QMainWindow):
         self.ui.btnUserManagement.setStyleSheet("")
         self.ui.btnTaskManagement.setStyleSheet("background-color: #9933cc;")
         self.ui.btnAccountabilityReports.setStyleSheet("")
+
+        widget = TaskManagement(self)
+        sub = QMdiSubWindow()
+        sub.setWidget(widget)
+        sub.setAttribute(Qt.WA_DeleteOnClose)
+        sub.setWindowFlags(Qt.FramelessWindowHint)
+        self.ui.mdiArea.addSubWindow(sub)
+        sub.showMaximized()
     
     def handleBtnAccountabilityReports(self):
         self.ui.btnUserList.setStyleSheet("")
         self.ui.btnUserManagement.setStyleSheet("")
         self.ui.btnTaskManagement.setStyleSheet("")
         self.ui.btnAccountabilityReports.setStyleSheet("background-color: #9933cc;")
+
+        widget = AccountabilityReports(self)
+        sub = QMdiSubWindow()
+        sub.setWidget(widget)
+        sub.setAttribute(Qt.WA_DeleteOnClose)
+        sub.setWindowFlags(Qt.FramelessWindowHint)
+        self.ui.mdiArea.addSubWindow(sub)
+        sub.showMaximized()
     
     def handleBtnUserName(self):
         if self.ui.btnUserName.text() == "Sign In":
