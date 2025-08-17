@@ -1,0 +1,28 @@
+#centralwidget {
+	background-color: #181818;
+}
+
+#btnUserName, #btnUserList, #btnUserManagement, #btnTaskManagement, #btnAccountabilityReports {
+    padding: 10px 20px;
+    font-size: 14px;
+    border: none;
+    border-radius: 10px;
+    color: white;
+    background-color: #666;
+    font-family: 'Roboto';
+}
+
+#btnUserName:hover, #btnUserList:hover, #btnUserManagement:hover, #btnTaskManagement:hover, #btnAccountabilityReports:hover {
+    background-color: #aa17e8;
+}
+
+#labelTitle {
+    font-size: 18px;
+    font-weight: bold;
+    color: white;
+}
+
+#lcdDateTime {
+    border: 1px solid gray;
+    border-radius: 5px;
+}

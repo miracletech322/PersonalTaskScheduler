@@ -1,0 +1,9 @@
+<RCC>
+  <qresource prefix="Resources">
+    <file>userlist.qss</file>
+    <file>usermanagement.qss</file>
+    <file>logo.png</file>
+    <file>mainwindow.qss</file>
+    <file>app.png</file>
+  </qresource>
+</RCC>

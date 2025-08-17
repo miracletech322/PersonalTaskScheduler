@@ -1,0 +1,17 @@
+#centeralwidget {
+	background-color:  #3a3a3a;
+}
+
+QPushButton {
+    padding: 10px 20px;
+    font-size: 14px;
+    border: none;
+    border-radius: 10px;
+    color: white;
+    background-color: #666;
+    font-family: 'Roboto';
+}
+
+QPushButton:hover {
+    background-color: #aa17e8;
+}
