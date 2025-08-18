@@ -54,6 +54,9 @@
         </item>
         <item>
          <widget class="QTableWidget" name="tableWidget">
+          <property name="selectionMode">
+           <enum>QAbstractItemView::SelectionMode::SingleSelection</enum>
+          </property>
           <column>
            <property name="text">
             <string>Username</string>

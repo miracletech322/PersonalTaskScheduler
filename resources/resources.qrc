@@ -1,11 +1,15 @@
 <RCC>
   <qresource prefix="Resources">
+    <file>taskdialog.qss</file>
     <file>accountabilityreports.qss</file>
     <file>usermanagement.qss</file>
     <file>userlist.qss</file>
     <file>taskmanagement.qss</file>
-    <file>logo.png</file>
     <file>mainwindow.qss</file>
     <file>app.png</file>
+    <file>down-arrow.png</file>
+    <file>up-arrow.png</file>
+    <file>checkbox-normal.png</file>
+    <file>checkbox-selected.png</file>
   </qresource>
 </RCC>

@@ -34,8 +34,8 @@ class UserManagement(QWidget):
         for user in userList:
             self.ui.tableWidget.insertRow(row)
             item = QTableWidgetItem(user['username'])
-            self.ui.tableWidget.setItem(row, 0, item)
             item.setFlags(item.flags() & ~Qt.ItemFlag.ItemIsEditable)
+            self.ui.tableWidget.setItem(row, 0, item)
 
             item = QTableWidgetItem(str(user['_id']))
             self.ui.tableWidget.setItem(row, 1, item)
@@ -47,11 +47,29 @@ class UserManagement(QWidget):
             QMessageBox.warning(self, "Input Error", "Please enter a username.")
             return
 
+        len = self.ui.tableWidget.rowCount()
+        exist = False
+        for row in range(len):
+            item = self.ui.tableWidget.item(row, 0)
+            if item is not None:
+                if item.text().lower() == username.lower():
+                    exist = True
+                    QMessageBox.warning(self, "Duplicate", f"'{username}' already exists!")
+        
+        if exist:
+            return
+    
         row = self.ui.tableWidget.rowCount()
         self.ui.tableWidget.insertRow(row)
         userId = self.parent.funcInsertUser(username)
-        self.ui.tableWidget.setItem(row, 0, QTableWidgetItem(username))
-        self.ui.tableWidget.setItem(row, 1, QTableWidgetItem(userId))
+
+        item = QTableWidgetItem(username)
+        item.setFlags(item.flags() & ~Qt.ItemFlag.ItemIsEditable)
+        self.ui.tableWidget.setItem(row, 0, item)
+
+        item = QTableWidgetItem(userId)
+        item.setFlags(item.flags() & ~Qt.ItemFlag.ItemIsEditable)
+        self.ui.tableWidget.setItem(row, 1, item)
         self.ui.edtUser.clear()
 
     def handleBtnMinus(self):

@@ -1,0 +1,91 @@
+#centeralwidget {
+	background-color:  #3a3a3a;
+}
+
+#btnAccept, #btnReject {
+    padding: 10px 20px;
+    font-size: 14px;
+    border: none;
+    border-radius: 10px;
+    color: white;
+    background-color: #666;
+    font-family: 'Roboto';
+}
+
+#btnAccept:hover, #btnReject:hover {
+    background-color: #aa17e8;
+}
+
+#edtTitle, #edtDescription {
+    background-color: #333;
+    border: 1px solid #555;
+    border-radius: 8px;
+    padding: 6px;
+    font-size: 14px;
+    color: white;
+}
+
+#labelTime, #labelTitle, #labelDescription, #labelManual {
+    font-size: 14px;
+	color: #cac1cd;
+}
+
+QTimeEdit {
+    background-color: #333;
+    border: 1px solid #555;
+    border-radius: 8px;
+    padding: 6px;
+    font-size: 14px;
+    color: white;
+}
+
+/* Button containers */
+QTimeEdit::up-button,
+QTimeEdit::down-button {
+    background: transparent;
+    border: none;
+    width: 18px;
+    subcontrol-origin: border;
+}
+
+/* Positioning */
+QTimeEdit::up-button {
+    subcontrol-position: top right;
+    margin: 4px 8px 0 0;
+}
+QTimeEdit::down-button {
+    subcontrol-position: bottom right;
+    margin: 0 8px 4px 0;
+}
+
+/* Icons */
+QTimeEdit::up-arrow {
+    image: url(:/Resources/up-arrow.png);
+    width: 10px;
+    height: 10px;
+}
+QTimeEdit::down-arrow {
+    image: url(:/Resources/down-arrow.png);
+    width: 10px;
+    height: 10px;
+}
+
+/* Hover effect for buttons */
+QTimeEdit::up-button:hover,
+QTimeEdit::down-button:hover {
+    background: #555;
+    border-radius: 3px;
+}
+
+QCheckBox::indicator {
+    width: 42px;
+    height: 22px;
+}
+
+QCheckBox::indicator::unchecked {
+    image: url(:/Resources/checkbox-normal.png);
+}
+
+QCheckBox::indicator::checked {
+    image: url(:/Resources/checkbox-selected.png);
+}

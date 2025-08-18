@@ -55,6 +55,7 @@ class MainWindow(QMainWindow):
         self.client = MongoClient("mongodb+srv://miracletech322:HgqjOfh0QjIAWJDN@cluster0.b1te6ax.mongodb.net/")
         self.db = self.client["sample_mflix"]
         self.tableUsers = self.db["users"]
+        self.tableTasks = self.db["tasks"]
         return
 
     def handleBtnUserList(self):
@@ -146,9 +147,43 @@ class MainWindow(QMainWindow):
         self.tableUsers.delete_one({
             "_id": ObjectId(userId)
         })
-    
+
     def funcUserSign(self, username, userId):
         self.ui.btnUserName.setProperty("userId", userId)
         self.ui.btnUserName.setText(username)
 
         QMessageBox.information(self, "Login", f"Welcome {username}! You have successfully signed in.")
+
+    def funcCreateTask(self, title, description, time, manual):
+        taskId = self.tableTasks.insert_one({
+            "title": title,
+            "description": description,
+            "time": time,
+            "manual": manual
+        }).inserted_id
+        return str(taskId)
+
+    def funcUpdateTask(self, time, title, description, manual, taskId):
+        res = self.tableTasks.update_one(
+            {
+                "_id": ObjectId(taskId)
+            },
+            {
+                "$set": {
+                    "title": title,
+                    "description": description,
+                    "time": time.toString("hh:mm"),
+                    "manual": manual
+                }
+            }
+        )
+        return res.modified_count > 0
+
+    def funcDeleteTask(self, taskId):
+        self.tableTasks.delete_one({
+            "_id": ObjectId(taskId)
+        })
+
+    def funcLoadTask(self):
+        all_tasks = list(self.tableTasks.find())
+        return all_tasks
