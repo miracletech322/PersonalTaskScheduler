@@ -1,11 +1,12 @@
 from PySide6.QtCore import Qt, QFile, QTextStream, QTimer
-from PySide6.QtWidgets import QMainWindow, QSystemTrayIcon, QMdiSubWindow, QMessageBox
-from PySide6.QtGui import QIcon
+from PySide6.QtWidgets import QMainWindow, QSystemTrayIcon, QMdiSubWindow, QMessageBox, QDialog, QApplication
+from PySide6.QtGui import QIcon, QPixmap
 from pymongo import MongoClient
 
 from bson import ObjectId
 from qasync import asyncSlot
 from datetime import datetime
+import shutil
 
 from userlist import UserList
 from usermanagement import UserManagement
@@ -31,17 +32,20 @@ class MainWindow(QMainWindow):
         self.ui.btnSetting.clicked.connect(self.handleBtnSetting)
         self.ui.chkAppMode.toggled.connect(self.handleModeToggle)
 
+        self.initSystemTray()
         self.initCSS()
         self.initMongoDB()
         self.initLCD()
         self.initMinutelyTimer()
-        self.initSystemTray()
         self.handleBtnUserList()
         self.alertWindow = AlertWindow(self)
 
+        self.ui.labelAppMode.setVisible(False)
+        self.ui.chkAppMode.setVisible(False)
+
     def initSystemTray(self):
         self.tray_icon = QSystemTrayIcon(self)
-        self.tray_icon.setIcon(QIcon(":/Resources/app.png"))
+        self.tray_icon.setIcon(QIcon(global_vars.app_dir + "/assets/app.png"))
         self.tray_icon.show()
         self.tray_icon.activated.connect(self.slt_trayIconActivated)
     
@@ -60,6 +64,19 @@ class MainWindow(QMainWindow):
     def initCSS(self):
         self.setWindowTitle(global_vars.app_title)
         self.ui.labelTitle.setText(global_vars.app_title)
+        pixmap = QPixmap(global_vars.app_dir + "/assets/app.png")
+        pixmap = pixmap.scaled(
+            self.ui.labelLogo.width(),
+            self.ui.labelLogo.height(),
+            Qt.KeepAspectRatio,
+            Qt.SmoothTransformation
+        )
+        self.ui.labelLogo.setPixmap(pixmap)
+        self.tray_icon.setIcon(QIcon(global_vars.app_dir + "/assets/app.png"))
+        app = QApplication.instance()
+        if app is not None:
+            app.setWindowIcon(QIcon(global_vars.app_dir + "/assets/app.png"))
+
 
         file = QFile(":/Resources/mainwindow.qss")
         if file.open(QFile.ReadOnly | QFile.Text):
@@ -146,7 +163,14 @@ class MainWindow(QMainWindow):
     
     def handleBtnSetting(self):
         dlg = SettingWindow(self)
-        dlg.exec()
+        if dlg.exec() == QDialog.Rejected:
+            return
+        
+        global_vars.settings.setValue("title", dlg.ui.edtAppTitle.text())
+        global_vars.app_title = dlg.ui.edtAppTitle.text()
+        if dlg.fileName != global_vars.app_dir + "/assets/app.png":
+            shutil.copy2(dlg.fileName, global_vars.app_dir + "/assets/app.png")
+        self.initCSS()
 
     def handleModeToggle(self, toggle):
         if toggle:
@@ -160,7 +184,6 @@ class MainWindow(QMainWindow):
         time_str = now.strftime("%H:%M")
         taskList = self.funcFindTask(time_str)
         now = datetime.now()
-        print(now)
         for task in taskList:
             self.alertWindow.setContentData({
                 'title': task['title'],

@@ -5,6 +5,7 @@ from PySide6.QtCore import QSharedMemory
 from PySide6.QtGui import QIcon
 import asyncio
 from mainwindow import MainWindow
+import global_vars
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
@@ -13,7 +14,7 @@ if __name__ == "__main__":
     if not shared.create(1):
         sys.exit(-1)
 
-    app.setWindowIcon(QIcon(":/Resources/app.png"))
+    app.setWindowIcon(QIcon(global_vars.app_dir + "/assets/app.png"))
 
     # app.setQuitOnLastWindowClosed(False)
 
