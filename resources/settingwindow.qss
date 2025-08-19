@@ -1,0 +1,31 @@
+#centeralwidget {
+	background-color:  #3a3a3a;
+}
+
+#labelAppTitle {
+    font-size: 14px;
+	color: #cac1cd;
+}
+
+#edtAppTitle {
+    background-color: #333;
+    border: 1px solid #555;
+    border-radius: 8px;
+    padding: 6px;
+    font-size: 14px;
+    color: white;
+}
+
+#btnChoose, #btnSave, #btnClose {
+    padding: 10px 20px;
+    font-size: 14px;
+    border: none;
+    border-radius: 10px;
+    color: white;
+    background-color: #666;
+    font-family: 'Roboto';
+}
+
+#btnChoose:hover, #btnSave:hover, #btnClose:hover {
+    background-color: #aa17e8;
+}

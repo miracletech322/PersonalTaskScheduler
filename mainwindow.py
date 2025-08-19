@@ -11,8 +11,11 @@ from userlist import UserList
 from usermanagement import UserManagement
 from taskmanagement import TaskManagement
 from accountabilityreports import AccountabilityReports
+from alertwindow import AlertWindow
+from settingwindow import SettingWindow
 
 from ui_mainwindow import Ui_MainWindow
+import global_vars
 
 class MainWindow(QMainWindow):
     def __init__(self):
@@ -25,25 +28,39 @@ class MainWindow(QMainWindow):
         self.ui.btnTaskManagement.clicked.connect(self.handleBtnTaskManagement)
         self.ui.btnAccountabilityReports.clicked.connect(self.handleBtnAccountabilityReports)
         self.ui.btnUserName.clicked.connect(self.handleBtnUserName)
+        self.ui.btnSetting.clicked.connect(self.handleBtnSetting)
+        self.ui.chkAppMode.toggled.connect(self.handleModeToggle)
 
         self.initCSS()
-        self.initLCD()
-        self.initSystemTray()
         self.initMongoDB()
+        self.initLCD()
+        self.initMinutelyTimer()
+        self.initSystemTray()
         self.handleBtnUserList()
+        self.alertWindow = AlertWindow(self)
 
     def initSystemTray(self):
         self.tray_icon = QSystemTrayIcon(self)
         self.tray_icon.setIcon(QIcon(":/Resources/app.png"))
         self.tray_icon.show()
+        self.tray_icon.activated.connect(self.slt_trayIconActivated)
     
     def initLCD(self):
         self.timer = QTimer()
         self.timer.timeout.connect(self.slt_updateDateTime)
         self.timer.start(1000)
         self.slt_updateDateTime()
-    
+
+    def initMinutelyTimer(self):
+        self.globalTimer = QTimer()
+        self.globalTimer.timeout.connect(self.slt_handleCheckTask)
+        self.globalTimer.start(1000 * 60)
+        self.slt_handleCheckTask()
+
     def initCSS(self):
+        self.setWindowTitle(global_vars.app_title)
+        self.ui.labelTitle.setText(global_vars.app_title)
+
         file = QFile(":/Resources/mainwindow.qss")
         if file.open(QFile.ReadOnly | QFile.Text):
             stream = QTextStream(file)
@@ -56,7 +73,6 @@ class MainWindow(QMainWindow):
         self.db = self.client["sample_mflix"]
         self.tableUsers = self.db["users"]
         self.tableTasks = self.db["tasks"]
-        return
 
     def handleBtnUserList(self):
         self.ui.btnUserList.setStyleSheet("background-color: #9933cc;")
@@ -73,7 +89,6 @@ class MainWindow(QMainWindow):
         sub.setWindowFlags(Qt.FramelessWindowHint)
         self.ui.mdiArea.addSubWindow(sub)
         sub.showMaximized()
-
     
     def handleBtnUserManagement(self):
         self.ui.btnUserList.setStyleSheet("")
@@ -128,10 +143,39 @@ class MainWindow(QMainWindow):
                 return
             else:
                 self.ui.btnUserName.setText("Sign In")
+    
+    def handleBtnSetting(self):
+        dlg = SettingWindow(self)
+        dlg.exec()
+
+    def handleModeToggle(self, toggle):
+        if toggle:
+            global_vars.settings.setValue("theme", "Light Mode")
+        else:
+            global_vars.settings.setValue("theme", "Dark Mode")
+        self.initCSS()
+
+    def slt_handleCheckTask(self):
+        now = datetime.now()
+        time_str = now.strftime("%H:%M")
+        taskList = self.funcFindTask(time_str)
+        now = datetime.now()
+        print(now)
+        for task in taskList:
+            self.alertWindow.setContentData({
+                'title': task['title'],
+                'description': task['description'],
+                'taskId': str(task['_id']),
+            })
+            self.alertWindow.showFullScreen()
 
     def slt_updateDateTime(self):
         current_time = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
         self.ui.lcdDateTime.display(current_time)
+
+    def slt_trayIconActivated(self, reason):
+        if reason == QSystemTrayIcon.DoubleClick:
+            self.show()
 
     def funcLoadUser(self):
         all_users = list(self.tableUsers.find())
@@ -187,3 +231,16 @@ class MainWindow(QMainWindow):
     def funcLoadTask(self):
         all_tasks = list(self.tableTasks.find())
         return all_tasks
+    
+    def funcFindTask(self, time_str):
+        matched = list(self.tableTasks.find({"time": time_str}))
+        return matched
+
+    def funcConfirmAlert(self, taskId):
+        print(f"funcConfirmAlert: {taskId}")
+    
+    def funcYesAlert(self, taskId):
+        print(f"funcYesAlert: {taskId}")
+
+    def funcNoAlert(self, taskId):
+        print(f"functionNoAlert: {taskId}")

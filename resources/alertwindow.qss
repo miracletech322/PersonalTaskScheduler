@@ -1,0 +1,35 @@
+#centeralwidget {
+	background-color: #181818;
+}
+
+#btnYes, #btnNo, #btnConfirm {
+    padding: 10px 20px;
+    font-size: 14px;
+    border: none;
+    border-radius: 10px;
+    color: white;
+    background-color: #666;
+    font-family: 'Roboto';
+    width: 100px;
+}
+
+#btnYes:hover, #btnNo:hover, #btnConfirm:hover {
+    background-color: #aa17e8;
+}
+
+#labelTitle {
+    font-size: 48px;
+    font-weight: bold;
+    color: white;
+}
+
+#labelDescription {
+    font-size: 24px;
+    font-weight: bold;
+    color: white;
+}
+
+#lcdDateTime {
+    border: 1px solid gray;
+    border-radius: 5px;
+}

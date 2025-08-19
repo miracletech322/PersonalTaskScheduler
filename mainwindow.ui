@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Personal Task Scheduler</string>
+   <string/>
   </property>
   <widget class="QWidget" name="centralwidget">
    <layout class="QGridLayout" name="gridLayout_2">
@@ -47,7 +47,7 @@
            <item>
             <widget class="QLabel" name="labelTitle">
              <property name="text">
-              <string>Personal Task Scheduler</string>
+              <string/>
              </property>
             </widget>
            </item>
@@ -63,6 +63,27 @@
               </size>
              </property>
             </spacer>
+           </item>
+           <item>
+            <widget class="QLabel" name="labelAppMode">
+             <property name="text">
+              <string>Light Mode</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QCheckBox" name="chkAppMode">
+             <property name="text">
+              <string/>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QPushButton" name="btnSetting">
+             <property name="text">
+              <string>Settings</string>
+             </property>
+            </widget>
            </item>
            <item>
             <widget class="QPushButton" name="btnUserName">

@@ -35,6 +35,9 @@
          <layout class="QHBoxLayout" name="horizontalLayout">
           <item>
            <widget class="QDateEdit" name="dateEdit">
+            <property name="displayFormat">
+             <string>yyyy/MM/dd</string>
+            </property>
             <property name="calendarPopup">
              <bool>true</bool>
             </property>
@@ -54,9 +57,9 @@
            </spacer>
           </item>
           <item>
-           <widget class="QPushButton" name="btnA">
+           <widget class="QPushButton" name="btnExport">
             <property name="text">
-             <string>A</string>
+             <string>Export To Excel</string>
             </property>
            </widget>
           </item>

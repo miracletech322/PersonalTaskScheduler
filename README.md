@@ -11,6 +11,8 @@ pyside6-uic userlist.ui -o ui_userlist.py
 pyside6-uic taskmanagement.ui -o ui_taskmanagement.py
 pyside6-uic accountabilityreports.ui -o ui_accountabilityreports.py
 pyside6-uic taskdialog.ui -o ui_taskdialog.py
+pyside6-uic alertwindow.ui -o ui_alertwindow.py
+pyside6-uic settingwindow.ui -o ui_settingwindow.py
 py main.py
 
 pyside6-designer mainwindow.ui
@@ -19,5 +21,6 @@ pyside6-designer userlist.ui
 pyside6-designer taskmanagement.ui
 pyside6-designer accountabilityreports.ui
 pyside6-designer taskdialog.ui
-
+pyside6-designer alertwindow.ui
+pyside6-designer settingwindow.ui
 pyinstaller --onefile --windowed main.py

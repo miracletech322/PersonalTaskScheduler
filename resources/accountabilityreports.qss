@@ -2,6 +2,20 @@
 	background-color:  #3a3a3a;
 }
 
+#btnExport {
+    padding: 10px 20px;
+    font-size: 14px;
+    border: none;
+    border-radius: 10px;
+    color: white;
+    background-color: #666;
+    font-family: 'Roboto';
+}
+
+#btnExport:hover {
+    background-color: #aa17e8;
+}
+
 QTableWidget {
     background-color: #333;
     border: 1px solid #555;
@@ -36,4 +50,36 @@ QScrollBar::handle:vertical:hover {
 QScrollBar::add-line:vertical, QScrollBar::sub-line:vertical, QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
     background: none;
     height: 0px;
+}
+
+QDateEdit {
+    padding: 8px 14px;
+    font-size: 14px;
+    border: none;
+    border-radius: 10px;
+    color: white;
+    background-color: #666;
+    font-family: 'Roboto';
+}
+
+/* Calendar button on the right */
+QDateEdit::drop-down {
+    border: none;
+    width: 24px;
+    background: transparent;
+    subcontrol-origin: padding;
+    subcontrol-position: right center;
+    margin-right: 4px; /* spacing from right edge */
+}
+
+/* Use your qrc icon */
+QDateEdit::down-arrow {
+    image: url(:/Resources/down-arrow.png);   /* replace with your qrc path */
+    width: 12px;
+    height: 12px;
+}
+
+/* Hover effect like QPushButton */
+QDateEdit:hover {
+    background-color: #777;
 }

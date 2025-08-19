@@ -3,6 +3,7 @@
     <file>taskdialog.qss</file>
     <file>accountabilityreports.qss</file>
     <file>usermanagement.qss</file>
+    <file>alertwindow.qss</file>
     <file>userlist.qss</file>
     <file>taskmanagement.qss</file>
     <file>mainwindow.qss</file>
@@ -11,5 +12,7 @@
     <file>up-arrow.png</file>
     <file>checkbox-normal.png</file>
     <file>checkbox-selected.png</file>
+    <file>alarm.mp3</file>
+    <file>settingwindow.qss</file>
   </qresource>
 </RCC>

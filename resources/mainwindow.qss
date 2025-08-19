@@ -2,7 +2,7 @@
 	background-color: #181818;
 }
 
-#btnUserName, #btnUserList, #btnUserManagement, #btnTaskManagement, #btnAccountabilityReports {
+#btnSetting, #btnUserName, #btnUserList, #btnUserManagement, #btnTaskManagement, #btnAccountabilityReports {
     padding: 10px 20px;
     font-size: 14px;
     border: none;
@@ -12,7 +12,7 @@
     font-family: 'Roboto';
 }
 
-#btnUserName:hover, #btnUserList:hover, #btnUserManagement:hover, #btnTaskManagement:hover, #btnAccountabilityReports:hover {
+#btnSetting:hover, #btnUserName:hover, #btnUserList:hover, #btnUserManagement:hover, #btnTaskManagement:hover, #btnAccountabilityReports:hover {
     background-color: #aa17e8;
 }
 
@@ -25,4 +25,22 @@
 #lcdDateTime {
     border: 1px solid gray;
     border-radius: 5px;
+}
+
+#labelAppMode {
+    font-size: 14px;
+    color: white;
+}
+
+QCheckBox::indicator {
+    width: 42px;
+    height: 22px;
+}
+
+QCheckBox::indicator::unchecked {
+    image: url(:/Resources/checkbox-normal.png);
+}
+
+QCheckBox::indicator::checked {
+    image: url(:/Resources/checkbox-selected.png);
 }
