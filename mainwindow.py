@@ -77,7 +77,6 @@ class MainWindow(QMainWindow):
         if app is not None:
             app.setWindowIcon(QIcon(global_vars.app_dir + "/assets/app.png"))
 
-
         file = QFile(":/Resources/mainwindow.qss")
         if file.open(QFile.ReadOnly | QFile.Text):
             stream = QTextStream(file)
@@ -191,6 +190,7 @@ class MainWindow(QMainWindow):
                 'taskId': str(task['_id']),
             })
             self.alertWindow.showFullScreen()
+            self.alertWindow.exec()
 
     def slt_updateDateTime(self):
         current_time = datetime.now().strftime("%Y-%m-%d %H:%M:%S")

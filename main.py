@@ -16,7 +16,7 @@ if __name__ == "__main__":
 
     app.setWindowIcon(QIcon(global_vars.app_dir + "/assets/app.png"))
 
-    # app.setQuitOnLastWindowClosed(False)
+    app.setQuitOnLastWindowClosed(False)
 
     loop = QEventLoop(app)
     asyncio.set_event_loop(loop)

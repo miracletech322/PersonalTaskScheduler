@@ -11,7 +11,6 @@
     <file>up-arrow.png</file>
     <file>checkbox-normal.png</file>
     <file>checkbox-selected.png</file>
-    <file>alarm.mp3</file>
     <file>settingwindow.qss</file>
   </qresource>
 </RCC>

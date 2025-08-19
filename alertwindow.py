@@ -1,17 +1,20 @@
-from PySide6.QtWidgets import QWidget
+from PySide6.QtWidgets import QDialog
 from PySide6.QtCore import Qt, QFile, QTextStream, QTimer, QUrl
 from PySide6.QtMultimedia import QMediaPlayer, QAudioOutput
 
 from ui_alertwindow import Ui_AlertWindow
 from datetime import datetime
+import global_vars
 
-class AlertWindow(QWidget):
+class AlertWindow(QDialog):
     def __init__(self, parent=None):
         super().__init__()
         self.ui = Ui_AlertWindow()
         self.ui.setupUi(self)
         self.parent = parent
-        self.setWindowFlags(self.windowFlags() | Qt.WindowStaysOnTopHint)
+        self.setWindowFlags(Qt.Window | Qt.FramelessWindowHint | Qt.WindowStaysOnTopHint)
+        self.setWindowModality(Qt.ApplicationModal)
+
 
         self.player = QMediaPlayer()
         self.audio_output = QAudioOutput()
@@ -52,8 +55,10 @@ class AlertWindow(QWidget):
         self.handlePlaySound()
     
     def handlePlaySound(self):
-        url = QUrl(":/Resources/alert.mp3")
+        url = QUrl.fromLocalFile(global_vars.app_dir + "/assets/alarm.mp3")
         self.player.setSource(url)
+        self.player.setLoops(QMediaPlayer.Loops.Infinite)
+
         self.player.play()
 
     def handleStopSound(self):
