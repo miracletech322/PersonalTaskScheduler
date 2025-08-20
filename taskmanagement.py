@@ -12,7 +12,7 @@ class TaskManagement(QWidget):
         self.parent = parent
 
         self.ui.tableWidget.verticalHeader().setVisible(False)
-        self.ui.tableWidget.horizontalHeader().setVisible(False)
+        # self.ui.tableWidget.horizontalHeader().setVisible(False)
         self.ui.tableWidget.setColumnWidth(1, 200)
         self.ui.tableWidget.setColumnWidth(2, 500)
         self.ui.tableWidget.setColumnHidden(4, True)

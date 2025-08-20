@@ -21,6 +21,11 @@ class AlertWindow(QDialog):
         self.player.setAudioOutput(self.audio_output)
 
         self.taskId = ""
+        self.userId = ""
+        
+        self.isConfirm = False
+        self.isYes = False
+        self.isNo = False
 
         self.ui.btnConfirm.clicked.connect(self.handleBtnConfirm)
         self.ui.btnYes.clicked.connect(self.handleBtnYes)
@@ -48,7 +53,22 @@ class AlertWindow(QDialog):
         self.ui.lcdDateTime.display(current_time)
 
     def setContentData(self, data):
+        self.ui.btnConfirm.setVisible(False)
+        self.ui.btnYes.setVisible(False)
+        self.ui.btnNo.setVisible(False)
+
+        if data['manual'] == "Yes":
+            self.ui.btnYes.setVisible(True)
+            self.ui.btnNo.setVisible(True)
+        else:
+            self.ui.btnConfirm.setVisible(True)
+
+        self.isConfirm = False
+        self.isYes = False
+        self.isNo = False
+
         self.taskId = data['taskId']
+        self.userId = data['userId']
         QTimer.singleShot(15 * 60 * 1000, self.close)
         self.ui.labelTitle.setText(data['title'])
         self.ui.labelDescription.setText(data['description'])
@@ -65,17 +85,22 @@ class AlertWindow(QDialog):
         self.player.stop()
 
     def handleBtnConfirm(self):
-        self.parent.funcConfirmAlert(self.taskId)
+        self.isConfirm = True
+        self.parent.funcConfirmAlert(self.taskId, self.userId)
         self.close()
     
     def handleBtnYes(self):
-        self.parent.funcYesAlert(self.taskId)
+        self.isYes = True
+        self.parent.funcYesAlert(self.taskId, self.userId)
         self.close()
 
     def handleBtnNo(self):
-        self.parent.funcNoAlert(self.taskId)
+        self.isNo = True
+        self.parent.funcNoAlert(self.taskId, self.userId)
         self.close()
 
     def closeEvent(self, event):
+        if self.isConfirm is not True and self.isYes is not True and self.isNo is not True:
+            self.parent.funcMissed(self.taskId, self.userId)
         self.handleStopSound()
         event.accept()

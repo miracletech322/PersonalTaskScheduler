@@ -59,7 +59,7 @@ class MainWindow(QMainWindow):
         self.globalTimer = QTimer()
         self.globalTimer.timeout.connect(self.slt_handleCheckTask)
         self.globalTimer.start(1000 * 60)
-        self.slt_handleCheckTask()
+        # self.slt_handleCheckTask()
 
     def initCSS(self):
         self.setWindowTitle(global_vars.app_title)
@@ -89,6 +89,7 @@ class MainWindow(QMainWindow):
         self.db = self.client["sample_mflix"]
         self.tableUsers = self.db["users"]
         self.tableTasks = self.db["tasks"]
+        self.tableLogs = self.db["logs"]
 
     def handleBtnUserList(self):
         self.ui.btnUserList.setStyleSheet("background-color: #9933cc;")
@@ -184,10 +185,20 @@ class MainWindow(QMainWindow):
         taskList = self.funcFindTask(time_str)
         now = datetime.now()
         for task in taskList:
+            if task['time'] == "08:00" and task['description'] == "ENABLE DAY SHIFT CLOCK IN":
+                self.ui.btnUserName.setProperty("userId", "68a24744637ac75ed99189e2")
+                self.ui.btnUserName.setText("Day Shift")
+            
+            if task['time'] == "22:00" and task['description'] == "ENABLE NIGHT SHIFT CLOCK IN":
+                self.ui.btnUserName.setProperty("userId", "68a24748637ac75ed99189e3")
+                self.ui.btnUserName.setText("Night Shift")
+
             self.alertWindow.setContentData({
                 'title': task['title'],
                 'description': task['description'],
                 'taskId': str(task['_id']),
+                'userId': self.ui.btnUserName.property("userId"),
+                'manual': task['manual'],
             })
             self.alertWindow.showFullScreen()
             self.alertWindow.exec()
@@ -258,12 +269,105 @@ class MainWindow(QMainWindow):
     def funcFindTask(self, time_str):
         matched = list(self.tableTasks.find({"time": time_str}))
         return matched
-
-    def funcConfirmAlert(self, taskId):
-        print(f"funcConfirmAlert: {taskId}")
     
-    def funcYesAlert(self, taskId):
-        print(f"funcYesAlert: {taskId}")
+    def funcLoadLogs(self, filter_date=None):
+        match_stage = {}
+        if filter_date:
+            # Start and end of the day
+            start = datetime.combine(filter_date, datetime.min.time())
+            end = datetime.combine(filter_date, datetime.max.time())
+            match_stage = {"$match": {"timestamp": {"$gte": start, "$lte": end}}}
 
-    def funcNoAlert(self, taskId):
-        print(f"functionNoAlert: {taskId}")
+        pipeline = []
+
+        if match_stage:
+            pipeline.append(match_stage)
+
+        pipeline.extend([
+            {
+                "$addFields": {
+                    "taskObjId": {
+                        "$cond": [
+                            {"$ifNull": ["$taskId", False]},
+                            {"$toObjectId": "$taskId"},
+                            None
+                        ]
+                    },
+                    "userObjId": {
+                        "$cond": [
+                            {"$ifNull": ["$userId", False]},
+                            {"$toObjectId": "$userId"},
+                            None
+                        ]
+                    }
+                }
+            },
+            {
+                "$lookup": {
+                    "from": "users",
+                    "localField": "userObjId",
+                    "foreignField": "_id",
+                    "as": "user"
+                }
+            },
+            {"$unwind": {"path": "$user", "preserveNullAndEmptyArrays": True}},
+            {
+                "$lookup": {
+                    "from": "tasks",
+                    "localField": "taskObjId",
+                    "foreignField": "_id",
+                    "as": "task"
+                }
+            },
+            {"$unwind": {"path": "$task", "preserveNullAndEmptyArrays": True}},
+            {
+                "$project": {
+                    "_id": 1,
+                    "status": 1,
+                    "timestamp": 1,
+                    "userId": 1,
+                    "taskId": 1,
+                    "user": "$user",
+                    "task": "$task"
+                }
+            }
+        ])
+
+        result = list(self.tableLogs.aggregate(pipeline))
+        return result
+
+    def funcConfirmAlert(self, taskId, userId):
+        log = {
+            "taskId": taskId,
+            "userId": userId,
+            "status": "Confirmed",
+            "timestamp": datetime.now()
+        }
+        result = self.tableLogs.insert_one(log)
+    
+    def funcYesAlert(self, taskId, userId):
+        log = {
+            "taskId": taskId,
+            "userId": userId,
+            "status": "Yes",
+            "timestamp": datetime.now()
+        }
+        result = self.tableLogs.insert_one(log)
+
+    def funcNoAlert(self, taskId, userId):
+        log = {
+            "taskId": taskId,
+            "userId": userId,
+            "status": "No",
+            "timestamp": datetime.now()
+        }
+        result = self.tableLogs.insert_one(log)
+    
+    def funcMissed(self, taskId, userId):
+        log = {
+            "taskId": taskId,
+            "userId": userId,
+            "status": "Missed",
+            "timestamp": datetime.now()
+        }
+        result = self.tableLogs.insert_one(log)
