@@ -1,5 +1,6 @@
 from PySide6.QtWidgets import QWidget, QDialog, QTableWidgetItem, QMessageBox
 from PySide6.QtCore import Qt, QFile, QTextStream
+from PySide6.QtGui import QColor
 
 from ui_taskmanagement import Ui_TaskManagement
 from taskdialog import TaskDialog
@@ -44,22 +45,27 @@ class TaskManagement(QWidget):
         for task in taskList:
             self.ui.tableWidget.insertRow(row)
             item = QTableWidgetItem(task['time'])
+            if task['manual'] == "Yes": item.setBackground(QColor(128, 0, 128, 100))
             self.ui.tableWidget.setItem(row, 0, item)
             item.setFlags(item.flags() & ~Qt.ItemFlag.ItemIsEditable)
 
             item = QTableWidgetItem(task['title'])
+            if task['manual'] == "Yes": item.setBackground(QColor(128, 0, 128, 100))
             self.ui.tableWidget.setItem(row, 1, item)
             item.setFlags(item.flags() & ~Qt.ItemFlag.ItemIsEditable)
 
             item = QTableWidgetItem(task['description'])
+            if task['manual'] == "Yes": item.setBackground(QColor(128, 0, 128, 100))
             self.ui.tableWidget.setItem(row, 2, item)
             item.setFlags(item.flags() & ~Qt.ItemFlag.ItemIsEditable)
 
             item = QTableWidgetItem(task['manual'])
+            if task['manual'] == "Yes": item.setBackground(QColor(128, 0, 128, 100))
             self.ui.tableWidget.setItem(row, 3, item)
             item.setFlags(item.flags() & ~Qt.ItemFlag.ItemIsEditable)
 
             item = QTableWidgetItem(str(task['_id']))
+            if task['manual'] == "Yes": item.setBackground(QColor(128, 0, 128, 100))
             self.ui.tableWidget.setItem(row, 4, item)
             row = row + 1
 
@@ -71,21 +77,25 @@ class TaskManagement(QWidget):
         taskId = self.parent.funcCreateTask(dlg.title, dlg.description, dlg.time.toString("hh:mm"), dlg.manual)
         row = self.ui.tableWidget.rowCount()
         self.ui.tableWidget.insertRow(row)
-
+    
         item = QTableWidgetItem(dlg.time.toString("hh:mm"))
         item.setFlags(item.flags() & ~Qt.ItemFlag.ItemIsEditable)
+        if dlg.manual == "Yes": item.setBackground(QColor(128, 0, 128, 100))
         self.ui.tableWidget.setItem(row, 0, item)
 
         item = QTableWidgetItem(dlg.title)
         item.setFlags(item.flags() & ~Qt.ItemFlag.ItemIsEditable)
+        if dlg.manual == "Yes": item.setBackground(QColor(128, 0, 128, 100))
         self.ui.tableWidget.setItem(row, 1, item)
 
         item = QTableWidgetItem(dlg.description)
         item.setFlags(item.flags() & ~Qt.ItemFlag.ItemIsEditable)
+        if dlg.manual == "Yes": item.setBackground(QColor(128, 0, 128, 100))
         self.ui.tableWidget.setItem(row, 2, item)
 
         item = QTableWidgetItem(dlg.manual)
         item.setFlags(item.flags() & ~Qt.ItemFlag.ItemIsEditable)
+        if dlg.manual == "Yes": item.setBackground(QColor(128, 0, 128, 100))
         self.ui.tableWidget.setItem(row, 3, item)
         
         self.ui.tableWidget.setItem(row, 4, QTableWidgetItem(taskId))
@@ -117,17 +127,21 @@ class TaskManagement(QWidget):
         
         if self.parent.funcUpdateTask(dlg.time, dlg.title, dlg.description, dlg.manual, dlg.taskId):
             item = QTableWidgetItem(dlg.time.toString("hh:mm"))
-            self.ui.tableWidget.setItem(row, 0, item)
+            if dlg.manual == "Yes": item.setBackground(QColor(128, 0, 128, 100))
             item.setFlags(item.flags() & ~Qt.ItemFlag.ItemIsEditable)
+            self.ui.tableWidget.setItem(row, 0, item)
 
             item = QTableWidgetItem(dlg.title)
-            self.ui.tableWidget.setItem(row, 1, item)
+            if dlg.manual == "Yes": item.setBackground(QColor(128, 0, 128, 100))
             item.setFlags(item.flags() & ~Qt.ItemFlag.ItemIsEditable)
+            self.ui.tableWidget.setItem(row, 1, item)
 
             item = QTableWidgetItem(dlg.description)
-            self.ui.tableWidget.setItem(row, 2, item)
+            if dlg.manual == "Yes": item.setBackground(QColor(128, 0, 128, 100))
             item.setFlags(item.flags() & ~Qt.ItemFlag.ItemIsEditable)
+            self.ui.tableWidget.setItem(row, 2, item)
 
             item = QTableWidgetItem(dlg.manual)
-            self.ui.tableWidget.setItem(row, 3, item)
+            if dlg.manual == "Yes": item.setBackground(QColor(128, 0, 128, 100))
             item.setFlags(item.flags() & ~Qt.ItemFlag.ItemIsEditable)
+            self.ui.tableWidget.setItem(row, 3, item)
