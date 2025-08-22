@@ -62,6 +62,92 @@ class AccountabilityReports(QWidget):
             item.setFlags(item.flags() & ~Qt.ItemFlag.ItemIsEditable)
             self.ui.tableWidget.setItem(row, 3, item)
 
+            hours = ""
+            if log['status'] == "Yes" and log['task']['description'] == "BREAKFAST/MEDS COMPLETED?":
+                hours = "1hr(s)"
+            if log['status'] == "No" and log['task']['description'] == "BREAKFAST/MEDS COMPLETED?":
+                hours = "0hr(s)"
+
+            if log['status'] == "Yes" and log['task']['description'] == "MEDS/PRESSURE/WATER COMPLETED?":
+                hours = "0.5hr(s)"
+            if log['status'] == "No" and log['task']['description'] == "MEDS/PRESSURE/WATER COMPLETED?":
+                hours = "0hr(s)"
+
+            if log['status'] == "Yes" and log['task']['description'] == "INTERACTION/ACTIVITIES/LUNCH PREP/MEDS COMPLETED?":
+                hours = "2hr(s)"
+            if log['status'] == "No" and log['task']['description'] == "INTERACTION/ACTIVITIES/LUNCH PREP/MEDS COMPLETED?":
+                hours = "0hr(s)"
+
+            if log['status'] == "Yes" and log['task']['description'] == "LUNCH/KITCHEN/MEDS COMPLETED?":
+                hours = "1hr(s)"
+            if log['status'] == "No" and log['task']['description'] == "LUNCH/KITCHEN/MEDS COMPLETED?":
+                hours = "0hr(s)"
+
+            if log['status'] == "Yes" and log['task']['description'] == "SNACKS/COOK DINNER COMPLETED?":
+                hours = "3.5hr(s)"
+            if log['status'] == "No" and log['task']['description'] == "SNACKS/COOK DINNER COMPLETED?":
+                hours = "0hr(s)"
+
+            if log['status'] == "Yes" and log['task']['description'] == "DINNER/MEDS/BREAK/KITCHEN/DISHES COMPLETED?":
+                hours = "1.5hr(s)"
+            if log['status'] == "No" and log['task']['description'] == "DINNER/MEDS/BREAK/KITCHEN/DISHES COMPLETED?":
+                hours = "0hr(s)"
+
+            if log['status'] == "Yes" and log['task']['description'] == "PUT TO BED/MEDS/CHARTING/CHECK RESIDENTS COMPLETED?":
+                hours = "1hr(s)"
+            if log['status'] == "No" and log['task']['description'] == "PUT TO BED/MEDS/CHARTING/CHECK RESIDENTS COMPLETED?":
+                hours = "0hr(s)"
+
+            if log['status'] == "Yes" and log['task']['description'] == "BREAK/ALL OTHER ASSIGNMENTS/MEDS COMPLETED?":
+                hours = "1.25hr(s)"
+            if log['status'] == "No" and log['task']['description'] == "BREAK/ALL OTHER ASSIGNMENTS/MEDS COMPLETED?":
+                hours = "0hr(s)"
+
+            if log['status'] == "Yes" and log['task']['description'] == "LAUNDRY STARTED?":
+                hours = "0.5hr(s)"
+            if log['status'] == "No" and log['task']['description'] == "LAUNDRY STARTED?":
+                hours = "0hr(s)"
+
+            if log['status'] == "Yes" and log['task']['description'] == "RESIDENTS CHECKED?":
+                hours = "0.5hr(s)"
+            if log['status'] == "No" and log['task']['description'] == "RESIDENTS CHECKED?":
+                hours = "0hr(s)"
+
+            if log['status'] == "Yes" and log['task']['description'] == "LAUNDRY COMPLETED?":
+                hours = "1.5hr(s)"
+            if log['status'] == "No" and log['task']['description'] == "LAUNDRY COMPLETED?":
+                hours = "0hr(s)"
+
+            if log['status'] == "Yes" and log['task']['description'] == "RESIDENTS CHECKED?":
+                hours = "0.5hr(s)"
+            if log['status'] == "No" and log['task']['description'] == "RESIDENTS CHECKED?":
+                hours = "0hr(s)"
+
+            if log['status'] == "Yes" and log['task']['description'] == "BATHROOMS COMPLETED?":
+                hours = "1hr(s)"
+            if log['status'] == "No" and log['task']['description'] == "BATHROOMS COMPLETED?":
+                hours = "0hr(s)"
+
+            if log['status'] == "Yes" and log['task']['description'] == "ROOMS SWEPT/FLOORS MOPPED COMPLETED?":
+                hours = "1hr(s)"
+            if log['status'] == "No" and log['task']['description'] == "ROOMS SWEPT/FLOORS MOPPED COMPLETED?":
+                hours = "0hr(s)"
+
+            if log['status'] == "Yes" and log['task']['description'] == "BREAK/RESIDENTS CHECKED?":
+                hours = "0.25hr(s)"
+            if log['status'] == "No" and log['task']['description'] == "BREAK/RESIDENTS CHECKED?":
+                hours = "0hr(s)"
+
+            if log['status'] == "Yes" and log['task']['description'] == "RESIDENTS CHECKED/PANTRY/CLEANING/TRASH/ROOMS COMPLETED?":
+                hours = "1.25hr(s)"
+            if log['status'] == "No" and log['task']['description'] == "RESIDENTS CHECKED/PANTRY/CLEANING/TRASH/ROOMS COMPLETED?":
+                hours = "0hr(s)"
+
+            if log['status'] == "Yes" and log['task']['description'] == "RESIDENTS CLEANED/BATHED/BRUSHED/READY/BEDS COMPLETED?":
+                hours = "1.25hr(s)"
+            if log['status'] == "No" and log['task']['description'] == "RESIDENTS CLEANED/BATHED/BRUSHED/READY/BEDS COMPLETED?":
+                hours = "0hr(s)"
+
             item = QTableWidgetItem(log['status'])
             item.setFlags(item.flags() & ~Qt.ItemFlag.ItemIsEditable)
             self.ui.tableWidget.setItem(row, 4, item)
@@ -70,6 +156,10 @@ class AccountabilityReports(QWidget):
             item = QTableWidgetItem(time_str)
             item.setFlags(item.flags() & ~Qt.ItemFlag.ItemIsEditable)
             self.ui.tableWidget.setItem(row, 5, item)
+
+            item = QTableWidgetItem(hours)
+            item.setFlags(item.flags() & ~Qt.ItemFlag.ItemIsEditable)
+            self.ui.tableWidget.setItem(row, 6, item)
 
             row = row + 1
 
@@ -86,11 +176,14 @@ class AccountabilityReports(QWidget):
         wb = Workbook()
         ws = wb.active
         ws.title = "Alarm Time"
-        ws["A1"] = "Title"
-        ws["B1"] = "Description"
-        ws["C1"] = "User"
-        ws["D1"] = "Status"
+
+        ws["A1"] = "Alarm Time"
+        ws["B1"] = "Title"
+        ws["C1"] = "Description"
+        ws["D1"] = "User"
         ws["E1"] = "Processed"
+        ws["F1"] = "Clicked"
+        ws["G1"] = "Hrs Worked"
         row = self.ui.tableWidget.rowCount()
         for i in range(row):
             ws.append((
@@ -100,6 +193,7 @@ class AccountabilityReports(QWidget):
                 self.ui.tableWidget.item(i, 3).text(),
                 self.ui.tableWidget.item(i, 4).text(),
                 self.ui.tableWidget.item(i, 5).text(),
+                self.ui.tableWidget.item(i, 6).text(),
             ))
         wb.save(file_path)
 

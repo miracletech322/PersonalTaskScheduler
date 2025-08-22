@@ -1,7 +1,9 @@
-from PySide6.QtWidgets import QWidget, QMessageBox, QTableWidgetItem
+from PySide6.QtWidgets import QWidget, QMessageBox, QTableWidgetItem, QDialog
 from PySide6.QtCore import Qt, QFile, QTextStream
 
 from ui_usermanagement import Ui_UserManagement
+from authwindow import AuthWindow
+
 import global_vars
 
 class UserManagement(QWidget):
@@ -21,6 +23,29 @@ class UserManagement(QWidget):
         self.initCSS()
         self.loadUser()
         parent.themeChanged.connect(self.initCSS)
+
+        self.isAccess = False
+        self.ui.btnMinus.setVisible(False)
+        self.ui.btnPlus.setVisible(False)
+        self.ui.edtUser.setVisible(False)
+        self.ui.btnAccess.clicked.connect(self.handleAccess)
+    
+    def handleAccess(self):
+        if self.isAccess is False:
+            dlg = AuthWindow(self)
+            if dlg.exec() == QDialog.Rejected:
+                return
+            self.isAccess = True
+            self.ui.btnMinus.setVisible(True)
+            self.ui.btnPlus.setVisible(True)
+            self.ui.edtUser.setVisible(True)
+            self.ui.btnAccess.setText("Exit Access")
+        else:
+            self.isAccess = False
+            self.ui.btnMinus.setVisible(False)
+            self.ui.btnPlus.setVisible(False)
+            self.ui.edtUser.setVisible(False)
+            self.ui.btnAccess.setText("Enter Access")
 
     def initCSS(self):
         url = ":/Resources/usermanagement.qss"

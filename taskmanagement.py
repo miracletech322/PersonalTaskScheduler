@@ -4,6 +4,7 @@ from PySide6.QtGui import QColor
 
 from ui_taskmanagement import Ui_TaskManagement
 from taskdialog import TaskDialog
+from authwindow import AuthWindow
 import global_vars
 
 class TaskManagement(QWidget):
@@ -26,6 +27,26 @@ class TaskManagement(QWidget):
         self.initCSS()
         self.loadTask()
         parent.themeChanged.connect(self.initCSS)
+
+        self.isAccess = False
+        self.ui.btnMinus.setVisible(False)
+        self.ui.btnPlus.setVisible(False)
+        self.ui.btnAccess.clicked.connect(self.handleAccess)
+    
+    def handleAccess(self):
+        if self.isAccess is False:
+            dlg = AuthWindow(self)
+            if dlg.exec() == QDialog.Rejected:
+                return
+            self.isAccess = True
+            self.ui.btnMinus.setVisible(True)
+            self.ui.btnPlus.setVisible(True)
+            self.ui.btnAccess.setText("Exit Access")
+        else:
+            self.isAccess = False
+            self.ui.btnMinus.setVisible(False)
+            self.ui.btnPlus.setVisible(False)
+            self.ui.btnAccess.setText("Enter Access")
     
     def initCSS(self):
         url = ":/Resources/taskmanagement.qss"
@@ -116,6 +137,9 @@ class TaskManagement(QWidget):
         self.ui.tableWidget.removeRow(index)
     
     def handleEditTask(self, row, column):
+        if self.isAccess is False:
+            return
+
         time = self.ui.tableWidget.item(row, 0).text()
         title = self.ui.tableWidget.item(row, 1).text()
         description = self.ui.tableWidget.item(row, 2).text()

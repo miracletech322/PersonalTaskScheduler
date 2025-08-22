@@ -32,7 +32,7 @@ class UserList(QWidget):
         for user in userList:
             btn = QPushButton(user['username'])
             btn.setProperty("userId", str(user['_id']))
-            # btn.clicked.connect(self.handleBtnClick)
+            btn.clicked.connect(self.handleBtnClick)
             self.ui.verticalLayout.addWidget(btn)
     
     def handleBtnClick(self):

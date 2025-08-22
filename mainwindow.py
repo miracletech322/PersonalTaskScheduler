@@ -43,9 +43,6 @@ class MainWindow(QMainWindow):
         self.handleBtnUserList()
         self.alertWindow = AlertWindow(self)
 
-        # self.ui.labelAppMode.setVisible(False)
-        # self.ui.chkAppMode.setVisible(False)
-
     def initSystemTray(self):
         self.tray_icon = QSystemTrayIcon(self)
         self.tray_icon.setIcon(QIcon(global_vars.app_dir + "/assets/app.png"))
@@ -160,14 +157,14 @@ class MainWindow(QMainWindow):
         sub.showMaximized()
     
     def handleBtnUserName(self):
-        if self.ui.btnUserName.text() == "Sign In":
+        if self.ui.btnUserName.text() == "CLOCK IN":
             self.handleBtnUserList()
         else:
-            reply = QMessageBox.question(self, "Sign Out", f'Do you want to sign out from "{self.ui.btnUserName.text()}" account?', QMessageBox.Yes | QMessageBox.No)
+            reply = QMessageBox.question(self, "Clock Out", f'Do you want to clock out from "{self.ui.btnUserName.text()}" account?', QMessageBox.Yes | QMessageBox.No)
             if reply == QMessageBox.No:
                 return
             else:
-                self.ui.btnUserName.setText("Sign In")
+                self.ui.btnUserName.setText("CLOCK IN")
     
     def handleBtnSetting(self):
         dlg = AuthWindow(self)
@@ -201,13 +198,18 @@ class MainWindow(QMainWindow):
         taskList = self.funcFindTask(time_str)
         now = datetime.now()
         for task in taskList:
-            if task['time'] == "08:00" and task['description'] == "ENABLE DAY SHIFT CLOCK IN":
-                self.ui.btnUserName.setProperty("userId", "68a24744637ac75ed99189e2")
-                self.ui.btnUserName.setText("Day Shift")
+            if task['description'] == "AUTO CLOCK OUT":
+                self.ui.btnUserName.setProperty("userId", "")
+                self.ui.btnUserName.setText("CLOCK IN")
+                continue
+
+            # if task['time'] == "08:00" and task['description'] == "ENABLE DAY SHIFT CLOCK IN":
+            #     self.ui.btnUserName.setProperty("userId", "68a24744637ac75ed99189e2")
+            #     self.ui.btnUserName.setText("Day Shift")
             
-            if task['time'] == "22:00" and task['description'] == "ENABLE NIGHT SHIFT CLOCK IN":
-                self.ui.btnUserName.setProperty("userId", "68a24748637ac75ed99189e3")
-                self.ui.btnUserName.setText("Night Shift")
+            # if task['time'] == "22:00" and task['description'] == "ENABLE NIGHT SHIFT CLOCK IN":
+            #     self.ui.btnUserName.setProperty("userId", "68a24748637ac75ed99189e3")
+            #     self.ui.btnUserName.setText("Night Shift")
 
             self.alertWindow.setContentData({
                 'title': task['title'],
@@ -244,7 +246,7 @@ class MainWindow(QMainWindow):
 
     def funcUserSign(self, username, userId):
         self.ui.btnUserName.setProperty("userId", userId)
-        self.ui.btnUserName.setText(username)
+        self.ui.btnUserName.setText(username + " - CLOCK OUT")
 
         QMessageBox.information(self, "Login", f"Welcome {username}! You have successfully signed in.")
 

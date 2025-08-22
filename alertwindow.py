@@ -64,6 +64,7 @@ class AlertWindow(QDialog):
         if data['manual'] == "Yes":
             self.ui.btnYes.setVisible(True)
             self.ui.btnNo.setVisible(True)
+            self.handlePlaySound()
         else:
             self.ui.btnConfirm.setVisible(True)
 
@@ -76,7 +77,6 @@ class AlertWindow(QDialog):
         QTimer.singleShot(15 * 60 * 1000, self.close)
         self.ui.labelTitle.setText(data['title'])
         self.ui.labelDescription.setText(data['description'])
-        self.handlePlaySound()
     
     def handlePlaySound(self):
         url = QUrl.fromLocalFile(global_vars.app_dir + "/assets/alarm.mp3")

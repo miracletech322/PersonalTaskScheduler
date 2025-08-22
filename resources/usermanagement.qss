@@ -11,7 +11,7 @@
     color: white;
 }
 
-#btnPlus, #btnMinus {
+#btnPlus, #btnMinus, #btnAccess {
     padding: 10px 20px;
     font-size: 14px;
     border: none;
@@ -21,7 +21,7 @@
     font-family: 'Roboto';
 }
 
-#btnPlus:hover, #btnMinus:hover {
+#btnPlus:hover, #btnMinus:hover, #btnAccess:hover {
     background-color: #aa17e8;
 }
 

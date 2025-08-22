@@ -85,7 +85,7 @@
            <item>
             <widget class="QPushButton" name="btnUserName">
              <property name="text">
-              <string>Sign In</string>
+              <string>CLOCK IN</string>
              </property>
             </widget>
            </item>
