@@ -1,0 +1,31 @@
+#centeralwidget {
+	background-color: #181818;
+}
+
+#btnEnter, #btnClose, #btnReset {
+    padding: 10px 20px;
+    font-size: 14px;
+    border: none;
+    border-radius: 10px;
+    color: white;
+    background-color: #666;
+    font-family: 'Roboto';
+}
+
+#btnEnter:hover, #btnClose:hover, #btnReset:hover {
+    background-color: #aa17e8;
+}
+
+#labelPassword {
+    font-size: 14px;
+	color: #cac1cd;
+}
+
+#edtPassword {
+    background-color: #333;
+    border: 1px solid #555;
+    border-radius: 8px;
+    padding: 6px;
+    font-size: 14px;
+    color: white;
+}

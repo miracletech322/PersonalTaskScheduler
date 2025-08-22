@@ -14,6 +14,7 @@ from taskmanagement import TaskManagement
 from accountabilityreports import AccountabilityReports
 from alertwindow import AlertWindow
 from settingwindow import SettingWindow
+from authwindow import AuthWindow
 
 from ui_mainwindow import Ui_MainWindow
 import global_vars
@@ -40,8 +41,8 @@ class MainWindow(QMainWindow):
         self.handleBtnUserList()
         self.alertWindow = AlertWindow(self)
 
-        self.ui.labelAppMode.setVisible(False)
-        self.ui.chkAppMode.setVisible(False)
+        # self.ui.labelAppMode.setVisible(False)
+        # self.ui.chkAppMode.setVisible(False)
 
     def initSystemTray(self):
         self.tray_icon = QSystemTrayIcon(self)
@@ -162,6 +163,10 @@ class MainWindow(QMainWindow):
                 self.ui.btnUserName.setText("Sign In")
     
     def handleBtnSetting(self):
+        dlg = AuthWindow(self)
+        if dlg.exec() == QDialog.Rejected:
+            return
+
         dlg = SettingWindow(self)
         if dlg.exec() == QDialog.Rejected:
             return
