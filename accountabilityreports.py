@@ -21,7 +21,9 @@ class AccountabilityReports(QWidget):
         self.loadLogs()
         self.ui.tableWidget.verticalHeader().setVisible(False)
         self.ui.tableWidget.setColumnWidth(1, 140)
-        self.ui.tableWidget.setColumnWidth(2, 370)
+        self.ui.tableWidget.setColumnWidth(2, 310)
+        self.ui.tableWidget.setColumnWidth(5, 80)
+        self.ui.tableWidget.setColumnWidth(6, 80)
         parent.themeChanged.connect(self.initCSS)
     
     def initCSS(self):

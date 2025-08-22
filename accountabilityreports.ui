@@ -92,12 +92,17 @@
           </column>
           <column>
            <property name="text">
-            <string>Status</string>
+            <string>Processed</string>
            </property>
           </column>
           <column>
            <property name="text">
-            <string>Processed</string>
+            <string>Clicked</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>Hrs Worked</string>
            </property>
           </column>
          </widget>
