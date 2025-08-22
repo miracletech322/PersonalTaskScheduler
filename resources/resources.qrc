@@ -1,5 +1,15 @@
 <RCC>
   <qresource prefix="Resources">
+    <file>authwindow_light.qss</file>
+    <file>passwordreset_light.qss</file>
+    <file>settingwindow_light.qss</file>
+    <file>mainwindow_light.qss</file>
+    <file>alertwindow_light.qss</file>
+    <file>accountabilityreports_light.qss</file>
+    <file>taskdialog_light.qss</file>
+    <file>userlist_light.qss</file>
+    <file>taskmanagement_light.qss</file>
+    <file>usermanagement_light.qss</file>
     <file>passwordreset.qss</file>
     <file>taskdialog.qss</file>
     <file>accountabilityreports.qss</file>

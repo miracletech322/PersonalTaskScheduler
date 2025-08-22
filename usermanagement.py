@@ -2,6 +2,7 @@ from PySide6.QtWidgets import QWidget, QMessageBox, QTableWidgetItem
 from PySide6.QtCore import Qt, QFile, QTextStream
 
 from ui_usermanagement import Ui_UserManagement
+import global_vars
 
 class UserManagement(QWidget):
     def __init__(self, parent=None):
@@ -19,9 +20,14 @@ class UserManagement(QWidget):
 
         self.initCSS()
         self.loadUser()
+        parent.themeChanged.connect(self.initCSS)
 
     def initCSS(self):
-        file = QFile(":/Resources/usermanagement.qss")
+        url = ":/Resources/usermanagement.qss"
+        if global_vars.app_theme == "Light Mode":
+            url = ":/Resources/usermanagement_light.qss"
+
+        file = QFile(url)
         if file.open(QFile.ReadOnly | QFile.Text):
             stream = QTextStream(file)
             stylesheet = stream.readAll()

@@ -1,0 +1,43 @@
+#centeralwidget, #scrollArea {
+    background-color: #f5f5f5;  /* light gray background */
+}
+
+QPushButton {
+    padding: 10px 20px;
+    font-size: 14px;
+    border: none;
+    border-radius: 10px;
+    color: #333333;              /* dark text */
+    background-color: #dddddd;   /* light button */
+    font-family: 'Roboto';
+}
+
+QPushButton:hover {
+    background-color: #aa17e8;   /* keep accent purple */
+    color: white;                /* better contrast */
+}
+
+QScrollBar:vertical {
+    background: transparent;
+    width: 6px;
+    margin: 2px 0 2px 0;
+    border: none;
+}
+
+QScrollBar::handle:vertical {
+    background: #cccccc;   /* lighter handle */
+    border-radius: 3px;
+    min-height: 20px;
+}
+
+QScrollBar::handle:vertical:hover {
+    background: #aaaaaa;   /* darker on hover */
+}
+
+QScrollBar::add-line:vertical,
+QScrollBar::sub-line:vertical,
+QScrollBar::add-page:vertical,
+QScrollBar::sub-page:vertical {
+    background: none;
+    height: 0px;
+}

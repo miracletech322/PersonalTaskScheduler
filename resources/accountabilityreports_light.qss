@@ -1,0 +1,89 @@
+#centeralwidget {
+    background-color: #f5f5f5;   /* light background */
+}
+
+#btnExport {
+    padding: 10px 20px;
+    font-size: 14px;
+    border: none;
+    border-radius: 10px;
+    color: #222222;              /* dark text */
+    background-color: #dddddd;   /* light gray button */
+    font-family: 'Roboto';
+}
+
+#btnExport:hover {
+    background-color: #aa17e8;   /* purple hover */
+    color: white;
+}
+
+QTableWidget {
+    background-color: #ffffff;   /* white table */
+    border: 1px solid #cccccc;
+    font-size: 14px;
+    color: #222222;              /* dark text */
+    selection-background-color: #e0e0ff;  /* soft blue highlight */
+    selection-color: #222222;
+}
+
+QTableWidget::item:selected {
+    background-color: rgba(170, 23, 232, 0.2); /* subtle purple */
+    color: #222222;
+}
+
+QScrollBar:vertical {
+    background: transparent;
+    width: 6px;
+    margin: 2px 0 2px 0;
+    border: none;
+}
+
+QScrollBar::handle:vertical {
+    background: #cccccc;   /* light gray scrollbar */
+    border-radius: 3px;
+    min-height: 20px;
+}
+
+QScrollBar::handle:vertical:hover {
+    background: #aaaaaa;   /* slightly darker hover */
+}
+
+QScrollBar::add-line:vertical,
+QScrollBar::sub-line:vertical,
+QScrollBar::add-page:vertical,
+QScrollBar::sub-page:vertical {
+    background: none;
+    height: 0px;
+}
+
+QDateEdit {
+    padding: 8px 14px;
+    font-size: 14px;
+    border: 1px solid #cccccc;   /* visible border in light mode */
+    border-radius: 10px;
+    color: #222222;
+    background-color: #ffffff;   /* white background */
+    font-family: 'Roboto';
+}
+
+/* Calendar button on the right */
+QDateEdit::drop-down {
+    border: none;
+    width: 24px;
+    background: transparent;
+    subcontrol-origin: padding;
+    subcontrol-position: right center;
+    margin-right: 4px;
+}
+
+/* Use your qrc icon */
+QDateEdit::down-arrow {
+    image: url(:/Resources/down-arrow.png);   /* keep your qrc path */
+    width: 12px;
+    height: 12px;
+}
+
+/* Hover effect like QPushButton */
+QDateEdit:hover {
+    background-color: #eeeeee;
+}

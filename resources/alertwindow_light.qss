@@ -1,0 +1,38 @@
+#centeralwidget {
+    background-color: #f5f5f5;   /* light background */
+}
+
+#btnYes, #btnNo, #btnConfirm {
+    padding: 10px 20px;
+    font-size: 14px;
+    border: none;
+    border-radius: 10px;
+    color: #222222;              /* dark text */
+    background-color: #dddddd;   /* light gray button */
+    font-family: 'Roboto';
+    width: 100px;
+}
+
+#btnYes:hover, #btnNo:hover, #btnConfirm:hover {
+    background-color: #aa17e8;   /* purple hover */
+    color: white;                /* contrast on hover */
+}
+
+#labelTitle {
+    font-size: 48px;
+    font-weight: bold;
+    color: #222222;              /* dark text */
+}
+
+#labelDescription {
+    font-size: 24px;
+    font-weight: bold;
+    color: #222222;              /* dark text */
+}
+
+#lcdDateTime {
+    border: 1px solid #cccccc;   /* light border */
+    border-radius: 5px;
+    background-color: #ffffff;   /* white background */
+    color: #222222;              /* dark text */
+}

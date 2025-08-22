@@ -1,0 +1,92 @@
+#centeralwidget {
+    background-color: #f5f5f5;   /* light background */
+}
+
+#btnAccept, #btnReject {
+    padding: 10px 20px;
+    font-size: 14px;
+    border: none;
+    border-radius: 10px;
+    color: #222222;              /* dark text */
+    background-color: #dddddd;   /* light gray button */
+    font-family: 'Roboto';
+}
+
+#btnAccept:hover, #btnReject:hover {
+    background-color: #aa17e8;   /* purple hover */
+    color: white;
+}
+
+#edtTitle, #edtDescription {
+    background-color: #ffffff;   /* white input */
+    border: 1px solid #cccccc;   /* light gray border */
+    border-radius: 8px;
+    padding: 6px;
+    font-size: 14px;
+    color: #222222;              /* dark text */
+}
+
+#labelTime, #labelTitle, #labelDescription, #labelManual {
+    font-size: 14px;
+    color: #222222;              /* dark text */
+}
+
+QTimeEdit {
+    background-color: #ffffff;   /* white input */
+    border: 1px solid #cccccc;   /* light gray border */
+    border-radius: 8px;
+    padding: 6px;
+    font-size: 14px;
+    color: #222222;              /* dark text */
+}
+
+/* Button containers */
+QTimeEdit::up-button,
+QTimeEdit::down-button {
+    background: transparent;
+    border: none;
+    width: 18px;
+    subcontrol-origin: border;
+}
+
+/* Positioning */
+QTimeEdit::up-button {
+    subcontrol-position: top right;
+    margin: 4px 8px 0 0;
+}
+QTimeEdit::down-button {
+    subcontrol-position: bottom right;
+    margin: 0 8px 4px 0;
+}
+
+/* Icons */
+QTimeEdit::up-arrow {
+    image: url(:/Resources/up-arrow.png);
+    width: 10px;
+    height: 10px;
+}
+QTimeEdit::down-arrow {
+    image: url(:/Resources/down-arrow.png);
+    width: 10px;
+    height: 10px;
+}
+
+/* Hover effect for buttons */
+QTimeEdit::up-button:hover,
+QTimeEdit::down-button:hover {
+    background: #cccccc;         /* light gray hover */
+    border-radius: 3px;
+}
+
+QCheckBox::indicator {
+    width: 42px;
+    height: 22px;
+}
+
+QCheckBox::indicator::unchecked {
+    image: url(:/Resources/checkbox-normal.png);   /* light version */
+}
+
+QCheckBox::indicator::checked {
+    image: url(:/Resources/checkbox-selected.png); /* light version */
+}

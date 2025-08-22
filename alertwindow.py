@@ -35,7 +35,11 @@ class AlertWindow(QDialog):
         self.initLCD()
     
     def initCSS(self):
-        file = QFile(":/Resources/alertwindow.qss")
+        url = ":/Resources/alertwindow.qss"
+        if global_vars.app_theme == "Light Mode":
+            url = ":/Resources/alertwindow_light.qss"
+
+        file = QFile(url)
         if file.open(QFile.ReadOnly | QFile.Text):
             stream = QTextStream(file)
             stylesheet = stream.readAll()

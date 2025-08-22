@@ -3,6 +3,7 @@ from PySide6.QtCore import Qt, QFile, QTextStream
 
 from ui_taskmanagement import Ui_TaskManagement
 from taskdialog import TaskDialog
+import global_vars
 
 class TaskManagement(QWidget):
     def __init__(self, parent=None):
@@ -23,9 +24,14 @@ class TaskManagement(QWidget):
 
         self.initCSS()
         self.loadTask()
+        parent.themeChanged.connect(self.initCSS)
     
     def initCSS(self):
-        file = QFile(":/Resources/taskmanagement.qss")
+        url = ":/Resources/taskmanagement.qss"
+        if global_vars.app_theme == "Light Mode":
+            url = ":/Resources/taskmanagement_light.qss"
+
+        file = QFile(url)
         if file.open(QFile.ReadOnly | QFile.Text):
             stream = QTextStream(file)
             stylesheet = stream.readAll()

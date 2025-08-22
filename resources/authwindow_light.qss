@@ -1,0 +1,32 @@
+#centeralwidget {
+    background-color: #f5f5f5;   /* light background */
+}
+
+#btnEnter, #btnClose, #btnReset {
+    padding: 10px 20px;
+    font-size: 14px;
+    border: none;
+    border-radius: 10px;
+    color: #222222;              /* dark text */
+    background-color: #dddddd;   /* light gray button */
+    font-family: 'Roboto';
+}
+
+#btnEnter:hover, #btnClose:hover, #btnReset:hover {
+    background-color: #aa17e8;   /* purple hover */
+    color: white;                /* ensure readability */
+}
+
+#labelPassword {
+    font-size: 14px;
+    color: #222222;              /* dark text */
+}
+
+#edtPassword {
+    background-color: #ffffff;   /* white input */
+    border: 1px solid #cccccc;   /* soft gray border */
+    border-radius: 8px;
+    padding: 6px;
+    font-size: 14px;
+    color: #222222;              /* dark text */
+}

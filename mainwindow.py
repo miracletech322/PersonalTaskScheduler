@@ -1,4 +1,4 @@
-from PySide6.QtCore import Qt, QFile, QTextStream, QTimer
+from PySide6.QtCore import Qt, QFile, QTextStream, QTimer, Signal
 from PySide6.QtWidgets import QMainWindow, QSystemTrayIcon, QMdiSubWindow, QMessageBox, QDialog, QApplication
 from PySide6.QtGui import QIcon, QPixmap
 from pymongo import MongoClient
@@ -20,6 +20,8 @@ from ui_mainwindow import Ui_MainWindow
 import global_vars
 
 class MainWindow(QMainWindow):
+    themeChanged = Signal()
+
     def __init__(self):
         super().__init__()
         self.ui = Ui_MainWindow()
@@ -78,7 +80,12 @@ class MainWindow(QMainWindow):
         if app is not None:
             app.setWindowIcon(QIcon(global_vars.app_dir + "/assets/app.png"))
 
-        file = QFile(":/Resources/mainwindow.qss")
+        url = ":/Resources/mainwindow.qss"
+        if global_vars.app_theme == "Light Mode":
+            self.ui.chkAppMode.setChecked(True)
+            url = ":/Resources/mainwindow_light.qss"
+
+        file = QFile(url)
         if file.open(QFile.ReadOnly | QFile.Text):
             stream = QTextStream(file)
             stylesheet = stream.readAll()
@@ -180,9 +187,13 @@ class MainWindow(QMainWindow):
     def handleModeToggle(self, toggle):
         if toggle:
             global_vars.settings.setValue("theme", "Light Mode")
+            global_vars.app_theme = "Light Mode"
         else:
             global_vars.settings.setValue("theme", "Dark Mode")
+            global_vars.app_theme = "Dark Mode"
+            
         self.initCSS()
+        self.themeChanged.emit()
 
     def slt_handleCheckTask(self):
         now = datetime.now()

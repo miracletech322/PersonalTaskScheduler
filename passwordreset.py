@@ -16,7 +16,11 @@ class PasswordReset(QDialog):
         self.ui.btnClose.clicked.connect(self.handleBtnClose)
     
     def initCSS(self):
-        file = QFile(":/Resources/passwordreset.qss")
+        url = ":/Resources/passwordreset.qss"
+        if global_vars.app_theme == "Light Mode":
+            url = ":/Resources/passwordreset_light.qss"
+
+        file = QFile(url)
         if file.open(QFile.ReadOnly | QFile.Text):
             stream = QTextStream(file)
             stylesheet = stream.readAll()

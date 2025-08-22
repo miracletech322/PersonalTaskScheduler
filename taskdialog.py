@@ -2,6 +2,7 @@ from PySide6.QtWidgets import QDialog, QMessageBox
 from PySide6.QtCore import Qt, QFile, QTextStream, QTime
 
 from ui_taskdialog import Ui_TaskDialog
+import global_vars
 
 class TaskDialog(QDialog):
     def __init__(self, parent=None, time = "", title = "", description = "", manual = "", taskId = ""):
@@ -34,7 +35,11 @@ class TaskDialog(QDialog):
         self.initCSS()
     
     def initCSS(self):
-        file = QFile(":/Resources/taskdialog.qss")
+        url = ":/Resources/taskdialog.qss"
+        if global_vars.app_theme == "Light Mode":
+            url = ":/Resources/taskdialog_light.qss"
+
+        file = QFile(url)
         if file.open(QFile.ReadOnly | QFile.Text):
             stream = QTextStream(file)
             stylesheet = stream.readAll()

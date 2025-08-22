@@ -18,7 +18,11 @@ class AuthWindow(QDialog):
         self.ui.btnReset.clicked.connect(self.handleBtnReset)
     
     def initCSS(self):
-        file = QFile(":/Resources/authwindow.qss")
+        url = ":/Resources/authwindow.qss"
+        if global_vars.app_theme == "Light Mode":
+            url = ":/Resources/authwindow_light.qss"
+
+        file = QFile(url)
         if file.open(QFile.ReadOnly | QFile.Text):
             stream = QTextStream(file)
             stylesheet = stream.readAll()

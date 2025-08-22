@@ -30,7 +30,11 @@ class SettingWindow(QDialog):
         self.fileName = global_vars.app_dir + "/assets/app.png"
     
     def initCSS(self):
-        file = QFile(":/Resources/settingwindow.qss")
+        url = ":/Resources/settingwindow.qss"
+        if global_vars.app_theme == "Light Mode":
+            url = ":/Resources/settingwindow_light.qss"
+
+        file = QFile(url)
         if file.open(QFile.ReadOnly | QFile.Text):
             stream = QTextStream(file)
             stylesheet = stream.readAll()

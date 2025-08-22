@@ -4,6 +4,7 @@ from PySide6.QtCore import Qt, QFile, QTextStream, QDate
 from ui_accountabilityreports import Ui_AccountabilityReports
 
 from openpyxl import Workbook
+import global_vars
 
 class AccountabilityReports(QWidget):
     def __init__(self, parent=None):
@@ -21,9 +22,14 @@ class AccountabilityReports(QWidget):
         self.ui.tableWidget.verticalHeader().setVisible(False)
         self.ui.tableWidget.setColumnWidth(1, 140)
         self.ui.tableWidget.setColumnWidth(2, 370)
+        parent.themeChanged.connect(self.initCSS)
     
     def initCSS(self):
-        file = QFile(":/Resources/accountabilityreports.qss")
+        url = ":/Resources/accountabilityreports.qss"
+        if global_vars.app_theme == "Light Mode":
+            url = ":/Resources/accountabilityreports_light.qss"
+
+        file = QFile(url)
         if file.open(QFile.ReadOnly | QFile.Text):
             stream = QTextStream(file)
             stylesheet = stream.readAll()

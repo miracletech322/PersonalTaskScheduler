@@ -1,0 +1,32 @@
+#centeralwidget {
+    background-color: #f5f5f5;   /* light background */
+}
+
+#labelAppTitle {
+    font-size: 14px;
+    color: #222222;              /* dark text */
+}
+
+#edtAppTitle {
+    background-color: #ffffff;   /* white input */
+    border: 1px solid #cccccc;   /* light gray border */
+    border-radius: 8px;
+    padding: 6px;
+    font-size: 14px;
+    color: #222222;              /* dark text */
+}
+
+#btnChoose, #btnSave, #btnClose {
+    padding: 10px 20px;
+    font-size: 14px;
+    border: none;
+    border-radius: 10px;
+    color: #222222;              /* dark text */
+    background-color: #dddddd;   /* light gray button */
+    font-family: 'Roboto';
+}
+
+#btnChoose:hover, #btnSave:hover, #btnClose:hover {
+    background-color: #aa17e8;   /* purple hover */
+    color: white;                /* contrast on hover */
+}
