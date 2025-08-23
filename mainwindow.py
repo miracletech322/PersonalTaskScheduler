@@ -48,13 +48,13 @@ class MainWindow(QMainWindow):
         self.tray_icon.setIcon(QIcon(global_vars.app_dir + "/assets/app.png"))
 
         # Context menu (with parent to avoid GC)
-        tray_menu = QMenu(self)
+        # tray_menu = QMenu(self)
 
-        exit_action = QAction("Exit", self)
-        exit_action.triggered.connect(QApplication.instance().quit)
-        tray_menu.addAction(exit_action)
+        # exit_action = QAction("Exit", self)
+        # exit_action.triggered.connect(QApplication.instance().quit)
+        # tray_menu.addAction(exit_action)
 
-        self.tray_icon.setContextMenu(tray_menu)
+        # self.tray_icon.setContextMenu(tray_menu)
         self.tray_icon.show()
 
         self.tray_icon.activated.connect(self.slt_trayIconActivated)

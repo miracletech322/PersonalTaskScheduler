@@ -27,4 +27,4 @@ pyside6-designer alertwindow.ui
 pyside6-designer settingwindow.ui
 pyside6-designer authwindow.ui
 pyside6-designer passwordreset.ui
-pyinstaller --onefile --windowed main.py
+pyinstaller --windowed main.py
