@@ -1,6 +1,6 @@
 from PySide6.QtCore import Qt, QFile, QTextStream, QTimer, Signal
-from PySide6.QtWidgets import QMainWindow, QSystemTrayIcon, QMdiSubWindow, QMessageBox, QDialog, QApplication
-from PySide6.QtGui import QIcon, QPixmap
+from PySide6.QtWidgets import QMainWindow, QSystemTrayIcon, QMdiSubWindow, QMessageBox, QDialog, QApplication, QMenu
+from PySide6.QtGui import QIcon, QPixmap, QAction
 from pymongo import MongoClient
 
 from bson import ObjectId
@@ -46,9 +46,20 @@ class MainWindow(QMainWindow):
     def initSystemTray(self):
         self.tray_icon = QSystemTrayIcon(self)
         self.tray_icon.setIcon(QIcon(global_vars.app_dir + "/assets/app.png"))
+
+        # Context menu (with parent to avoid GC)
+        tray_menu = QMenu(self)
+
+        exit_action = QAction("Exit", self)
+        exit_action.triggered.connect(QApplication.instance().quit)
+        tray_menu.addAction(exit_action)
+
+        self.tray_icon.setContextMenu(tray_menu)
         self.tray_icon.show()
+
         self.tray_icon.activated.connect(self.slt_trayIconActivated)
-    
+
+
     def initLCD(self):
         self.timer = QTimer()
         self.timer.timeout.connect(self.slt_updateDateTime)
@@ -143,6 +154,9 @@ class MainWindow(QMainWindow):
         sub.showMaximized()
     
     def handleBtnAccountabilityReports(self):
+        dlg = AuthWindow(self)
+        if dlg.exec() == QDialog.Rejected:
+            return
         self.ui.btnUserList.setStyleSheet("")
         self.ui.btnUserManagement.setStyleSheet("")
         self.ui.btnTaskManagement.setStyleSheet("")
