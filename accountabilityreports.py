@@ -64,89 +64,89 @@ class AccountabilityReports(QWidget):
 
             hours = ""
             if log['status'] == "Yes" and log['task']['description'] == "BREAKFAST/MEDS COMPLETED?":
-                hours = "1hr(s)"
+                hours = "1"
             if log['status'] == "No" and log['task']['description'] == "BREAKFAST/MEDS COMPLETED?":
-                hours = "0hr(s)"
+                hours = "0"
 
             if log['status'] == "Yes" and log['task']['description'] == "MEDS/PRESSURE/WATER COMPLETED?":
-                hours = "0.5hr(s)"
+                hours = "0.5"
             if log['status'] == "No" and log['task']['description'] == "MEDS/PRESSURE/WATER COMPLETED?":
-                hours = "0hr(s)"
+                hours = "0"
 
             if log['status'] == "Yes" and log['task']['description'] == "INTERACTION/ACTIVITIES/LUNCH PREP/MEDS COMPLETED?":
-                hours = "2hr(s)"
+                hours = "2"
             if log['status'] == "No" and log['task']['description'] == "INTERACTION/ACTIVITIES/LUNCH PREP/MEDS COMPLETED?":
-                hours = "0hr(s)"
+                hours = "0"
 
             if log['status'] == "Yes" and log['task']['description'] == "LUNCH/KITCHEN/MEDS COMPLETED?":
-                hours = "1hr(s)"
+                hours = "1"
             if log['status'] == "No" and log['task']['description'] == "LUNCH/KITCHEN/MEDS COMPLETED?":
-                hours = "0hr(s)"
+                hours = "0"
 
             if log['status'] == "Yes" and log['task']['description'] == "SNACKS/COOK DINNER COMPLETED?":
-                hours = "3.5hr(s)"
+                hours = "3.5"
             if log['status'] == "No" and log['task']['description'] == "SNACKS/COOK DINNER COMPLETED?":
-                hours = "0hr(s)"
+                hours = "0"
 
             if log['status'] == "Yes" and log['task']['description'] == "DINNER/MEDS/BREAK/KITCHEN/DISHES COMPLETED?":
-                hours = "1.5hr(s)"
+                hours = "1.5"
             if log['status'] == "No" and log['task']['description'] == "DINNER/MEDS/BREAK/KITCHEN/DISHES COMPLETED?":
-                hours = "0hr(s)"
+                hours = "0"
 
             if log['status'] == "Yes" and log['task']['description'] == "PUT TO BED/MEDS/CHARTING/CHECK RESIDENTS COMPLETED?":
-                hours = "1hr(s)"
+                hours = "1"
             if log['status'] == "No" and log['task']['description'] == "PUT TO BED/MEDS/CHARTING/CHECK RESIDENTS COMPLETED?":
-                hours = "0hr(s)"
+                hours = "0"
 
             if log['status'] == "Yes" and log['task']['description'] == "BREAK/ALL OTHER ASSIGNMENTS/MEDS COMPLETED?":
-                hours = "1.25hr(s)"
+                hours = "1.25"
             if log['status'] == "No" and log['task']['description'] == "BREAK/ALL OTHER ASSIGNMENTS/MEDS COMPLETED?":
-                hours = "0hr(s)"
+                hours = "0"
 
             if log['status'] == "Yes" and log['task']['description'] == "LAUNDRY STARTED?":
-                hours = "0.5hr(s)"
+                hours = "0.5"
             if log['status'] == "No" and log['task']['description'] == "LAUNDRY STARTED?":
-                hours = "0hr(s)"
+                hours = "0"
 
             if log['status'] == "Yes" and log['task']['description'] == "RESIDENTS CHECKED?":
-                hours = "0.5hr(s)"
+                hours = "0.5"
             if log['status'] == "No" and log['task']['description'] == "RESIDENTS CHECKED?":
-                hours = "0hr(s)"
+                hours = "0"
 
             if log['status'] == "Yes" and log['task']['description'] == "LAUNDRY COMPLETED?":
-                hours = "1.5hr(s)"
+                hours = "1.5"
             if log['status'] == "No" and log['task']['description'] == "LAUNDRY COMPLETED?":
-                hours = "0hr(s)"
+                hours = "0"
 
             if log['status'] == "Yes" and log['task']['description'] == "RESIDENTS CHECKED?":
-                hours = "0.5hr(s)"
+                hours = "0.5"
             if log['status'] == "No" and log['task']['description'] == "RESIDENTS CHECKED?":
-                hours = "0hr(s)"
+                hours = "0"
 
             if log['status'] == "Yes" and log['task']['description'] == "BATHROOMS COMPLETED?":
-                hours = "1hr(s)"
+                hours = "1"
             if log['status'] == "No" and log['task']['description'] == "BATHROOMS COMPLETED?":
-                hours = "0hr(s)"
+                hours = "0"
 
             if log['status'] == "Yes" and log['task']['description'] == "ROOMS SWEPT/FLOORS MOPPED COMPLETED?":
-                hours = "1hr(s)"
+                hours = "1"
             if log['status'] == "No" and log['task']['description'] == "ROOMS SWEPT/FLOORS MOPPED COMPLETED?":
-                hours = "0hr(s)"
+                hours = "0"
 
             if log['status'] == "Yes" and log['task']['description'] == "BREAK/RESIDENTS CHECKED?":
-                hours = "0.25hr(s)"
+                hours = "0.25"
             if log['status'] == "No" and log['task']['description'] == "BREAK/RESIDENTS CHECKED?":
-                hours = "0hr(s)"
+                hours = "0"
 
             if log['status'] == "Yes" and log['task']['description'] == "RESIDENTS CHECKED/PANTRY/CLEANING/TRASH/ROOMS COMPLETED?":
-                hours = "1.25hr(s)"
+                hours = "1.25"
             if log['status'] == "No" and log['task']['description'] == "RESIDENTS CHECKED/PANTRY/CLEANING/TRASH/ROOMS COMPLETED?":
-                hours = "0hr(s)"
+                hours = "0"
 
             if log['status'] == "Yes" and log['task']['description'] == "RESIDENTS CLEANED/BATHED/BRUSHED/READY/BEDS COMPLETED?":
-                hours = "1.25hr(s)"
+                hours = "1.25"
             if log['status'] == "No" and log['task']['description'] == "RESIDENTS CLEANED/BATHED/BRUSHED/READY/BEDS COMPLETED?":
-                hours = "0hr(s)"
+                hours = "0"
 
             item = QTableWidgetItem(log['status'])
             item.setFlags(item.flags() & ~Qt.ItemFlag.ItemIsEditable)
